@@ -2,9 +2,13 @@ package dev.java10x.CadastroDeNinjas.Ninjas;
 
 import dev.java10x.CadastroDeNinjas.Missoes.MissaoModel;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_ninjas")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,36 +19,4 @@ public class NinjaModel {
     @ManyToOne
     @JoinColumn(name = "missao_id")
     private MissaoModel missao;
-
-    public NinjaModel() {}
-
-    public NinjaModel(String nome, Integer idade, String email) {
-        this.nome = nome;
-        this.idade = idade;
-        this.email = email;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

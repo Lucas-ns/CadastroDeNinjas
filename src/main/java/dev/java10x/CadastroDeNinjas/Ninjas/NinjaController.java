@@ -11,12 +11,12 @@ public class NinjaController {
         return "Criando ninjas";
     }
 
-    @GetMapping("/todos")
-    public String todosOsNinjas() {
+    @GetMapping("/listar")
+    public String listarNinjas() {
         return "Lista com todos os ninjas";
     }
 
-    @GetMapping("/ninjaID")
+    @GetMapping("/listarID")
     public String ninjaPorId() {
         return "Ninja por ID";
     }

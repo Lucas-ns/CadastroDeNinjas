@@ -1,4 +1,13 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
-public class NinjaDTO {
-}
+import dev.java10x.CadastroDeNinjas.Missoes.MissaoModel;
+
+public record NinjaDTO(
+        Long id,
+        String nome,
+        String email,
+        Integer idade,
+        String rank,
+        String imageUrl,
+        MissaoModel missao
+) {}

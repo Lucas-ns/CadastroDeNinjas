@@ -1,9 +1,7 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +20,8 @@ public class NinjaService {
     }
 
     public NinjaDTO listarNinjaPorId(Long id) {
-        NinjaDTO ninjaPorId = mapper.toDto(ninjaRepository.findById(id).orElse(null));
-        return ninjaPorId;
+        Optional<NinjaModel> ninjaPorId = ninjaRepository.findById(id);
+        return ninjaPorId.map(mapper::toDto).orElse(null);
     }
 
     public NinjaDTO criarNinja(NinjaDTO ninja) {
@@ -36,12 +34,13 @@ public class NinjaService {
     }
 
     public NinjaDTO atualizarNinja(Long id, NinjaDTO ninja) {
-        if (!ninjaRepository.existsById(id)) {
-            return null;
+        Optional<NinjaModel> ninjaPorId = ninjaRepository.findById(id);
+        if (ninjaPorId.isPresent()) {
+            NinjaModel ninjaModel = mapper.toEntity(ninja);
+            ninjaModel.setId(id);
+            return mapper.toDto(ninjaRepository.save(ninjaModel));
         }
-        NinjaModel ninjaModel = mapper.toEntity(ninja);
-        ninjaModel.setId(id);
-        return mapper.toDto(ninjaRepository.save(ninjaModel));
+        return null;
     }
 
 }

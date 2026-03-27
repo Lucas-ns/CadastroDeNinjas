@@ -1,6 +1,5 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,34 +8,39 @@ import java.util.Optional;
 @Service
 public class NinjaService {
     final private NinjaRepository ninjaRepository;
+    final private NinjaMapper mapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper mapper) {
         this.ninjaRepository = ninjaRepository;
+        this.mapper = mapper;
     }
 
-    public List<NinjaModel> listarNinjas() {
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> listarNinjas() {
+        return ninjaRepository.findAll().stream().map(mapper::toDto).toList();
     }
 
-    public NinjaModel listarNinjaPorId(Long id) {
-        NinjaModel ninjaPorId = ninjaRepository.findById(id).orElse(null);
-        return ninjaPorId;
+    public NinjaDTO listarNinjaPorId(Long id) {
+        Optional<NinjaModel> ninjaPorId = ninjaRepository.findById(id);
+        return ninjaPorId.map(mapper::toDto).orElse(null);
     }
 
-    public NinjaModel criarNinja(NinjaModel ninja) {
-        return ninjaRepository.save(ninja);
+    public NinjaDTO criarNinja(NinjaDTO ninja) {
+        NinjaModel ninjaModel = mapper.toEntity(ninja);
+        return mapper.toDto(ninjaRepository.save(ninjaModel));
     }
 
     public void deletarNinja(Long id) {
         ninjaRepository.deleteById(id);
     }
 
-    public NinjaModel atualizarNinja(Long id, NinjaModel ninja) {
-        if (!ninjaRepository.existsById(id)) {
-            return null;
+    public NinjaDTO atualizarNinja(Long id, NinjaDTO ninja) {
+        Optional<NinjaModel> ninjaPorId = ninjaRepository.findById(id);
+        if (ninjaPorId.isPresent()) {
+            NinjaModel ninjaModel = mapper.toEntity(ninja);
+            ninjaModel.setId(id);
+            return mapper.toDto(ninjaRepository.save(ninjaModel));
         }
-        ninja.setId(id);
-        return ninjaRepository.save(ninja);
+        return null;
     }
 
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Ninjas</title>
+</head>
+<body>
+    <h1>Lista de Ninjas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Imagem</th>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Idade</th>
+                <th>Rank</th>
+                <th>Missão</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ninja: ${ninjas}">
+                <td><img th:src="@{${ninja.imageUrl}}" alt=""></td>
+                <td th:text="${ninja.id}"></td>
+                <td th:text="${ninja.nome}"></td>
+                <td th:text="${ninja.email}"></td>
+                <td th:text="${ninja.idade}"></td>
+                <td th:text="${ninja.rank}"></td>
+                <td th:text="${ninja.missao.nome}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

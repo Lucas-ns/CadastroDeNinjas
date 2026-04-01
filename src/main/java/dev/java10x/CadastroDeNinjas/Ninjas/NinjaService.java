@@ -34,8 +34,8 @@ public class NinjaService {
     }
 
     public NinjaDTO atualizarNinja(Long id, NinjaDTO ninja) {
-        Optional<NinjaModel> ninjaPorId = ninjaRepository.findById(id);
-        if (ninjaPorId.isPresent()) {
+        NinjaDTO ninjaPorId = listarNinjaPorId(id);
+        if (ninjaPorId != null) {
             NinjaModel ninjaModel = mapper.toEntity(ninja);
             ninjaModel.setId(id);
             return mapper.toDto(ninjaRepository.save(ninjaModel));

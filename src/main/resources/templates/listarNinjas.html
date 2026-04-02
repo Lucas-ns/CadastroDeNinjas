@@ -3,30 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Ninjas</title>
+    <link rel="stylesheet" th:href="@{/css/listar-ninjas.style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Lista de Ninjas</h1>
+    <a href="/ninjas/ui/criar">Adicionar ninja</a>
     <table>
         <thead>
             <tr>
-                <th>Imagem</th>
                 <th>Id</th>
+                <th>Imagem</th>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Idade</th>
                 <th>Rank</th>
                 <th>Missão</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="ninja: ${ninjas}">
-                <td><img th:src="@{${ninja.imageUrl}}" alt=""></td>
                 <td th:text="${ninja.id}"></td>
+                <td><img th:src="@{${ninja.imageUrl}}" width="100" height="100" alt="Imagem do personagem"></td>
                 <td th:text="${ninja.nome}"></td>
                 <td th:text="${ninja.email}"></td>
                 <td th:text="${ninja.idade}"></td>
                 <td th:text="${ninja.rank}"></td>
-                <td th:text="${ninja.missao.nome}"></td>
+                <td>
+                    <span th:if="${ninja.missao != null}" th:text="${ninja.missao.nome}"></span>
+                    <span th:unless="${ninja.missao != null}">Missão não registrada</span>
+                </td>
+                <td>
+                    <a th:href="@{/ninjas/ui/detalhes/{id}(id=${ninja.id})}">Ver detalhes</a>
+                    <a th:href="@{/ninjas/ui/alterar/{id}(id=${ninja.id})}">Alterar</a>
+                    <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Deletar</a>
+                </td>
             </tr>
         </tbody>
     </table>

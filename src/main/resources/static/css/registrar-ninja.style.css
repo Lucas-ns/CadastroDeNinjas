@@ -1,0 +1,112 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #0b0f19, #1a2333);
+    color: #f1f5f9;
+    padding: 20px;
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    color: #f97316;
+    text-shadow: 0 0 10px #f97316, 0 0 20px #fb923c;
+}
+
+/* Container do formulário */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(15, 23, 42, 0.95);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background-color: #020617;
+    color: #e2e8f0;
+    transition: 0.3s;
+}
+
+/* Efeito chakra ao focar */
+input:focus, select:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 10px #22c55e;
+}
+
+/* Botão enviar */
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #f97316, #fb923c);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #f97316;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #fb923c;
+}
+
+/* Link voltar */
+a[href="/ninjas/ui/listar"] {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #38bdf8;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+a[href="/ninjas/ui/listar"]:hover {
+    text-decoration: underline;
+    color: #7dd3fc;
+}
+
+/* Espaçamento */
+br {
+    display: none;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}

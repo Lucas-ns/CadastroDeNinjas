@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ninjas")
-public class NinjaController {
+public class NinjaController implements NinjaDocs {
 
     final private NinjaService ninjaService;
 
